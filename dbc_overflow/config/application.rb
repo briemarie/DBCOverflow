@@ -8,13 +8,6 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
 
-#for testing
-require 'rspec/rails'
-require 'shoulda/matchers'
-require 'capybara/rails'
-require 'capybara/rspec'
-
-
 # require "rails/test_unit/railtie"
 
 
