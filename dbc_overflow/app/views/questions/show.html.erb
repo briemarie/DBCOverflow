@@ -1,0 +1,13 @@
+<h1>DBCOverflow Question and Answers</h1>
+
+<div>
+    <h3><%= @question.title %></h3>
+    <p><%= @question.content %></p>
+</div>
+
+<div>
+    <% @answers.each do |a| %>
+        <h4><%= a.title %></h4>
+        <p><%= a.content %></p>
+    <% end %>
+</div>
