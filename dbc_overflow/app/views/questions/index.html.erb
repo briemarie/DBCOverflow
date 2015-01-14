@@ -5,6 +5,7 @@
     <%= q.content %>
 <% end %>
 
+<h2>Add a question:</h2>
 <%= form_for @question do |f| %>
   <%= f.label :title %>:
   <%= f.text_field :title %><br />
@@ -12,5 +13,8 @@
   <%= f.label :content %>:
   <%= f.text_field :content %><br />
 
-  <%= f.submit %>
+  <%= f.submit "Submit Question" %>
 <% end %>
+
+<%= link_to 'Edit Question', edit_question_path(@question) %>
+<%= button_to 'Delete Question'%>

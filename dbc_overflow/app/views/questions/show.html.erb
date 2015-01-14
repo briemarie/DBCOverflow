@@ -12,6 +12,7 @@
     <% end %>
 </div>
 
+<h2>Add and answer:</h2>
 <%= form_for @new_answer do |f| %>
   <%= f.label :title %>:
   <%= f.text_field :title %><br />
@@ -19,5 +20,5 @@
   <%= f.label :content %>:
   <%= f.text_field :content %><br />
 
-  <%= f.submit %>
+  <%= f.submit "Submit Answer" %>
 <% end %>

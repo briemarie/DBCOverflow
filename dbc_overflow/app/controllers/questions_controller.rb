@@ -1,31 +1,47 @@
 class QuestionsController < ApplicationController
-    def index
+    def index #get route
         @question = Question.create
 
         @questions = Question.all
     end
 
-    def show
+    def show #get/post route
         @new_answer = Answer.create
 
         @question = Question.find(params[:id])
-        @answers = Answer.all.where(question_id: @question.id)
+        @answers = Answer.find_by(question_id: @question.id)
     end
 
-    def new
+    # def new #get route
+    #     @question = Question.new
+    # end
+
+    def edit #This is the get route
+        @question = Question.find(params[:id])
     end
 
-    def edit
+    def create #post route
+        @question = Question.create(question_params)
+        if @question.save
+            redirect_to questions_path
+        else
+            render 'new'
+        end
     end
 
-    def create
-        Question.create(params[:question])
+    def update #This is the patch route
+        @question = Question.find(params[:id])
+
+        if @question.update_attributes(question_params)
+            redirect_to questions_path
+        else
+            render 'edit'
+        end
     end
 
-    def update
-    end
-
-    def destroy
+    def destroy #Post route
+        @question = Question.find(params[:id])
+        @question.destroy
     end
 
     private

@@ -10,5 +10,6 @@ FactoryGirl.define do
     factory :answer do
         title {Faker::Company.catch_phrase}
         content {Faker::Lorem.sentence}
+        question
     end
 end
