@@ -1,11 +1,15 @@
 class QuestionsController < ApplicationController
     def index
+        @question = Question.create
+
         @questions = Question.all
     end
 
     def show
+        @new_answer = Answer.create
+
         @question = Question.find(params[:id])
-        @answers = Answer.all.find_by(question_id: @question.id)
+        @answers = Answer.all.where(question_id: @question.id)
     end
 
     def new
@@ -15,6 +19,7 @@ class QuestionsController < ApplicationController
     end
 
     def create
+        Question.create(params[:question])
     end
 
     def update
@@ -22,4 +27,9 @@ class QuestionsController < ApplicationController
 
     def destroy
     end
+
+    private
+        def question_params
+            params.require(:question).permit(:title, :content)
+        end
 end
