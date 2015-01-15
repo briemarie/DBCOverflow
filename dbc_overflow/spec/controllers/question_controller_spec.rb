@@ -1,7 +1,7 @@
 require "rails_helper"
 require "factory_girl_rails"
 
-describe QuestionsController do
+RSpec.describe QuestionsController, :type => :controller do
   context "#index" do
     let(:question){FactoryGirl.create(:question)}
       it "responds successfully" do
@@ -16,17 +16,17 @@ describe QuestionsController do
         expect(response).to render_template("index")
       end
 
-      it "assigns questions to Question.all" do
-        build(:question)
+      it "displays all questions" do
+        question
         get :index
 
-        expect(assigns(:question)).to eq Question.all.first
+        expect(assigns(:questions)).to eq([question])
     end
   end
 
   context "#show" do
-    let!(:question){FactoryGirl.create(:question)}
-    let!(:answer){FactoryGirl.create(:answer, question: question)}
+    let(:question){FactoryGirl.create(:question)}
+    let(:answer){FactoryGirl.create(:answer, question: question)}
 
       it "responds successfully" do
         get :show, id: question.id
@@ -41,17 +41,17 @@ describe QuestionsController do
       end
 
       it "displays a question" do
-        build(:question)
+        question
         get :show, id: question.id
 
         expect(assigns(:question)).to eq Question.all.first
       end
 
       it "displays all answers to a question" do
-        build(:answer)
+        answer
         get :show, id: question.id
 
-        expect(assigns(:answer)).to eq Answer.all
+        expect(assigns(:answers)).to eq([answer])
       end
   end
 end
