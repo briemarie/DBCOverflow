@@ -1,7 +1,9 @@
 class QuestionsController < ApplicationController
     def index #get route
-        @question = Question.new
+        api = QuestionsHelper::Proverb.new()
+        @proverb = api.get_proverb
 
+        @question = Question.new
         @questions = Question.all
     end
 
