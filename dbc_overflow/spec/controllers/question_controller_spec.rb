@@ -25,8 +25,8 @@ describe QuestionsController do
   end
 
   context "#show" do
-    let(:question){FactoryGirl.create(:question)}
-    let(:answer){FactoryGirl.create(:answer)}
+    let!(:question){FactoryGirl.create(:question)}
+    let!(:answer){FactoryGirl.create(:answer, question: question)}
 
       it "responds successfully" do
         get :show, id: question.id

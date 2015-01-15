@@ -1,24 +1,33 @@
 <h1>DBCOverflow Question and Answers</h1>
 
 <div>
-    <h3><%= @question.title %></h3>
+    <h3><%= @question.vote_count %>| <%= @question.title %></h3>
     <p><%= @question.content %></p>
 </div>
 
+<%= link_to 'Edit Question', edit_question_path(@question) %>
+
 <div>
     <% @answers.each do |a| %>
-        <h4><%= a.title %></h4>
+        <h4><%= a.vote_count %> | <%= a.title %></h4>
         <p><%= a.content %></p>
+        <%= button_to 'Up', up_vote_question_answer_path(a), url: method: :patch %>
+        <%= button_to 'Down', down_vote_question_answer_path(a), method: :patch%>
     <% end %>
 </div>
 
-<h2>Add and answer:</h2>
-<%= form_for @new_answer do |f| %>
-  <%= f.label :title %>:
-  <%= f.text_field :title %><br />
+<h2>Add an answer:</h2>
+<%= form_for ([@question, @question.answers.build]) do |f| %>
+    <%= f.label :title %>:
+    <%= f.text_field :title %><br />
 
-  <%= f.label :content %>:
-  <%= f.text_field :content %><br />
+    <%= f.label :content %>:
+    <%= f.text_field :content %><br />
 
-  <%= f.submit "Submit Answer" %>
+<%= f.submit "Submit" %>
 <% end %>
+
+<br>
+<%= link_to 'Back to Questions', questions_path %>
+
+

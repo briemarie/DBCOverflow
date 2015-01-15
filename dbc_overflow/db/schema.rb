@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20150113065153) do
     t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "vote_count"
   end
 
   create_table "questions", force: true do |t|
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 20150113065153) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "vote_count"
   end
 
 end

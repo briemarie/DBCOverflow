@@ -3,8 +3,14 @@ Rails.application.routes.draw do
   # get 'questions/show/'
 
   resources :questions do
-    resources :answers
+    patch 'up_vote', on: :member
+    patch 'down_vote', on: :member
+      resources :answers do
+        patch 'up_vote', on: :member
+        patch 'down_vote', on: :member
   end
+end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

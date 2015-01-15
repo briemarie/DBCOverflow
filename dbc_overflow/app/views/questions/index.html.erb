@@ -1,20 +1,29 @@
 <h1>DBCOverflow Questions</h1>
-
-<% @questions.each do |q| %>
-    <%= q.title %>
-    <%= q.content %>
-<% end %>
+<table>
+    <tr>
+        <th>Vote Total</th>
+        <th>Vote Up</th>
+        <th>Vote Down</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <% @questions.each do |q| %>
+    <tr>
+        <td><%= q.vote_count %></td>
+        <td><%= button_to 'Up', up_vote_question_path(q), method: :patch%></td>
+        <td><%= button_to 'Down', down_vote_question_path(q), method: :patch%></td>
+        <td><%= q.title %></td>
+        <td><%= q.content %></td>
+        <td><%= link_to 'Edit', edit_question_path(q) %></td>
+        <td><%= link_to 'Destroy', question_path(q), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+</table>
 
 <h2>Add a question:</h2>
-<%= form_for @question do |f| %>
-  <%= f.label :title %>:
-  <%= f.text_field :title %><br />
 
-  <%= f.label :content %>:
-  <%= f.text_field :content %><br />
+<%= render 'form' %>
 
-  <%= f.submit "Submit Question" %>
-<% end %>
 
-<%= link_to 'Edit Question', edit_question_path(@question) %>
-<%= button_to 'Delete Question'%>

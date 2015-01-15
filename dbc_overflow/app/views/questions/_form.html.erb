@@ -1,0 +1,23 @@
+<%= form_for :question do |f| %>
+    <% if @question.errors.any? %>
+        <div id="error_explanation">
+            <h2>
+                <%= pluralize(@article.errors.count, "error") %> prohibited
+                this article from being saved:
+            </h2>
+            <ul>
+                <% @question.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <%= f.label :title %>:
+    <%= f.text_field :title %><br />
+
+    <%= f.label :content %>:
+    <%= f.text_field :content %><br />
+
+    <%= f.submit "Submit" %>
+<% end %>

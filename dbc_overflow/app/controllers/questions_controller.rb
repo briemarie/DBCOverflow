@@ -1,29 +1,30 @@
 class QuestionsController < ApplicationController
     def index #get route
-        @question = Question.create
+        @question = Question.new
 
         @questions = Question.all
     end
 
-    def show #get/post route
-        @new_answer = Answer.create
+    def show #get route
+        @new_answer = Answer.new
 
         @question = Question.find(params[:id])
-        @answers = Answer.find_by(question_id: @question.id)
+        @answers = @question.answers
     end
 
-    # def new #get route
-    #     @question = Question.new
-    # end
+    def new
+        @question = Question.new
+    end
 
     def edit #This is the get route
         @question = Question.find(params[:id])
     end
 
     def create #post route
-        @question = Question.create(question_params)
+        @question = Question.new(question_params)
+
         if @question.save
-            redirect_to questions_path
+            redirect_to @question
         else
             render 'new'
         end
@@ -32,8 +33,8 @@ class QuestionsController < ApplicationController
     def update #This is the patch route
         @question = Question.find(params[:id])
 
-        if @question.update_attributes(question_params)
-            redirect_to questions_path
+        if @question.update(question_params)
+            redirect_to @question
         else
             render 'edit'
         end
@@ -42,10 +43,26 @@ class QuestionsController < ApplicationController
     def destroy #Post route
         @question = Question.find(params[:id])
         @question.destroy
+
+        redirect_to questions_path
+    end
+
+    def up_vote
+        @question = Question.find(params[:id])
+        @question.increment!(:vote_count)
+
+        redirect_to questions_path
+    end
+
+    def down_vote
+        @question = Question.find(params[:id])
+        @question.decrement!(:vote_count)
+
+        redirect_to questions_path
     end
 
     private
         def question_params
-            params.require(:question).permit(:title, :content)
+            params.require(:question).permit(:title, :content, :vote_count)
         end
 end
