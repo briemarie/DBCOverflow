@@ -11,13 +11,13 @@
     <% @answers.each do |a| %>
         <h4><%= a.vote_count %> | <%= a.title %></h4>
         <p><%= a.content %></p>
-        <%= button_to 'Up', up_vote_question_answer_path(a), url: method: :patch %>
-        <%= button_to 'Down', down_vote_question_answer_path(a), method: :patch%>
+        <%= button_to 'Up', up_vote_question_answer_path(a), method: :patch, remote: true %>
+        <%= button_to 'Down', down_vote_question_answer_path(a), method: :patch, remote: true%>
     <% end %>
 </div>
 
 <h2>Add an answer:</h2>
-<%= form_for ([@question, @question.answers.build]) do |f| %>
+<%= form_for ([@question, @question.answers.build]), remote: true do |f| %>
     <%= f.label :title %>:
     <%= f.text_field :title %><br />
 

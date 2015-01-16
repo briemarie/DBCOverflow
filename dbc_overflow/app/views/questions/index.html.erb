@@ -2,7 +2,9 @@
   <%=@proverb%>
 </h1>
 
+<div>
 <h2>DBCOverflow Questions</h2>
+
 <table>
     <tr>
         <th>Vote Total</th>
@@ -13,21 +15,17 @@
         <th>Edit</th>
         <th>Delete</th>
     </tr>
-    <% @questions.each do |q| %>
-    <tr>
-        <td><%= q.vote_count %></td>
-        <td><%= button_to 'Up', up_vote_question_path(q), method: :patch%></td>
-        <td><%= button_to 'Down', down_vote_question_path(q), method: :patch%></td>
-        <td><%= q.title %></td>
-        <td><%= q.content %></td>
-        <td><%= link_to 'Edit', edit_question_path(q) %></td>
-        <td><%= link_to 'Destroy', question_path(q), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-    <% end %>
+        <% @questions.each do |q| %>
+            <%= render partial: 'question', :locals => {:q => q}%>
+        <% end %>
 </table>
+
 
 <h2>Add a question:</h2>
 
 <%= render 'form' %>
+</div>
+
+
 
 

@@ -25,10 +25,14 @@ class QuestionsController < ApplicationController
     def create #post route
         @question = Question.new(question_params)
 
-        if @question.save
-            redirect_to @question
-        else
-            render 'new'
+        respond_to do |format|
+            if @question.save
+                format.html { redirect_to(@question, :notice => 'Post created.') }
+                format.js
+            else
+                format.html { render :action => "new" }
+                format.js
+            end
         end
     end
 
