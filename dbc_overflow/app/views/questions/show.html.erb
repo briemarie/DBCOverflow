@@ -1,13 +1,13 @@
-<h1>DBCOverflow Question and Answers</h1>
+<h1 class="header">DBCOverflow Question and Answers</h1>
 
-<div>
+<div class= "question">
     <h3><%= @question.vote_count %>| <%= @question.title %></h3>
     <p><%= @question.content %></p>
 </div>
 
 <%= link_to 'Edit Question', edit_question_path(@question) %>
 
-<div>
+<div class="answers">
     <% @answers.each do |a| %>
         <h4><%= a.vote_count %> | <%= a.title %></h4>
         <p><%= a.content %></p>
@@ -16,8 +16,8 @@
     <% end %>
 </div>
 
-<h2>Add an answer:</h2>
-<%= form_for ([@question, @question.answers.build]), remote: true do |f| %>
+<h2 class= "prompt">Add an answer:</h2>
+<%= form_for ([@question, @question.answers.build]) do |f| %>
     <%= f.label :title %>:
     <%= f.text_field :title %><br />
 

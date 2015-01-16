@@ -27,7 +27,7 @@ class QuestionsController < ApplicationController
 
         respond_to do |format|
             if @question.save
-                format.html { redirect_to(@question, :notice => 'Post created.') }
+                format.html #{ redirect_to(@question, :notice => 'Post created.') }
                 format.js
             else
                 format.html { render :action => "new" }

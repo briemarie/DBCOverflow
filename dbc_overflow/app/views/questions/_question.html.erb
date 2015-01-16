@@ -1,9 +1,0 @@
-    <tr>
-        <td><%= q.vote_count %></td>
-        <td><%= button_to 'Up', up_vote_question_path(q), method: :patch, remote: true%></td>
-        <td><%= button_to 'Down', down_vote_question_path(q), method: :patch, remote: true%></td>
-        <td><%= q.title %></td>
-        <td><%= q.content %></td>
-        <td><%= link_to 'Edit', edit_question_path(q) %></td>
-        <td><%= link_to 'Destroy', question_path(q), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></td>
-    </tr>
